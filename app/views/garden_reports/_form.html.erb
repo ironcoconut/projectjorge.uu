@@ -1,0 +1,27 @@
+<%= form_with(model: garden_report, local: true) do |form| %>
+  <% if garden_report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(garden_report.errors.count, "error") %> prohibited this garden_report from being saved:</h2>
+
+      <ul>
+      <% garden_report.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_area :notes, id: :garden_report_notes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :garden_id %>
+    <%= form.text_field :garden_id, id: :garden_report_garden_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
