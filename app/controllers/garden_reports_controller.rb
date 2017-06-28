@@ -56,6 +56,6 @@ class GardenReportsController < ApplicationController
     end
 
     def garden_report_params
-      params.require(:garden_report).permit(:notes, :photo).merge(params.permit(:garden_id))
+      params.require(:garden_report).permit(:notes, :photo, :remove_image).merge(params.permit(:garden_id))
     end
 end

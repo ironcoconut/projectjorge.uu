@@ -4,9 +4,9 @@
       <h2><%= pluralize(garden_report.errors.count, "error") %> prohibited this garden_report from being saved:</h2>
 
       <ul>
-      <% garden_report.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% garden_report.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -14,6 +14,16 @@
   <div class="field">
     <%= form.label :notes %>
     <%= form.text_area :notes, id: :garden_report_notes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :photo %><br>
+    <%= form.file_field :photo %>
+    <% if form.object.photo? %>
+      <%= image_tag form.object.photo.url %>
+      <%= form.label :remove_photo %>
+      <%= form.check_box :remove_photo %>
+    <% end %>
   </div>
 
   <div class="actions">

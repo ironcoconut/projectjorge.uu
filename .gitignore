@@ -23,3 +23,6 @@
 
 # Ignore environment
 .env
+
+# Ignore test file uploads
+/public/uploads
