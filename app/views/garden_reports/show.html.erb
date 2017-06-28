@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Notes:</strong>
   <%= @garden_report.notes %>
@@ -7,7 +5,7 @@
 
 <p>
   <strong>Garden:</strong>
-  <%= @garden_report.garden %>
+  <%= @garden_report.garden.name %>
 </p>
 
 <%= link_to 'Edit', edit_garden_report_path(@garden_report) %> |

@@ -1,34 +1,27 @@
 class GardenReportsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_garden_report, only: [:show, :edit, :update, :destroy]
 
-  # GET /garden_reports
-  # GET /garden_reports.json
   def index
     @garden_reports = GardenReport.all
   end
 
-  # GET /garden_reports/1
-  # GET /garden_reports/1.json
   def show
   end
 
-  # GET /garden_reports/new
   def new
     @garden_report = GardenReport.new
   end
 
-  # GET /garden_reports/1/edit
   def edit
   end
 
-  # POST /garden_reports
-  # POST /garden_reports.json
   def create
     @garden_report = GardenReport.new(garden_report_params)
 
     respond_to do |format|
       if @garden_report.save
-        format.html { redirect_to @garden_report, notice: 'Garden report was successfully created.' }
+        format.html { redirect_to garden_report_path(id: @garden_report.id, garden_id: @garden_report.garden_id), notice: 'Garden report was successfully created.' }
         format.json { render :show, status: :created, location: @garden_report }
       else
         format.html { render :new }
@@ -37,8 +30,6 @@ class GardenReportsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /garden_reports/1
-  # PATCH/PUT /garden_reports/1.json
   def update
     respond_to do |format|
       if @garden_report.update(garden_report_params)
@@ -51,8 +42,6 @@ class GardenReportsController < ApplicationController
     end
   end
 
-  # DELETE /garden_reports/1
-  # DELETE /garden_reports/1.json
   def destroy
     @garden_report.destroy
     respond_to do |format|
@@ -62,13 +51,11 @@ class GardenReportsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_garden_report
       @garden_report = GardenReport.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def garden_report_params
-      params.require(:garden_report).permit(:notes, :garden_id)
+      params.require(:garden_report).permit(:notes, :photo).merge(params.permit(:garden_id))
     end
 end
