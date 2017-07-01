@@ -1,28 +1,15 @@
-<h1>Gardens</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Location</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @gardens.each do |garden| %>
-      <tr>
-        <td><%= garden.name %></td>
-        <td><%= garden.location %></td>
-        <td><%= garden.description %></td>
-        <td><%= link_to 'Show', garden %></td>
-        <td><%= link_to 'New Report', new_garden_garden_report_path(garden) %></td>
-      </tr>
+<div class="row">
+  <div class="col-xs-12 text-center">
+    <% @garden_reports.each do |report| %>
+      <div class="garden-report">
+        <%= link_to [report.garden, report] do %>
+          <%= image_tag report.photo.url, class: "" %>
+          <p class="garden-report-text text-left">
+            <span><%= report.garden.name %></span>
+            <span class="pull-right"><%= report.created_at.to_date %></span>
+          </p>
+        <% end %>
+      </div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Garden', new_garden_path %>
+  </div>
+</div>

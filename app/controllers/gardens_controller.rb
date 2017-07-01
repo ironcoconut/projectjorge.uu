@@ -3,7 +3,7 @@ class GardensController < ApplicationController
   before_action :set_garden, only: [:show, :edit, :update, :destroy]
 
   def index
-    @gardens = Garden.all
+    @garden_reports = GardenReport.includes(:garden).order(:created_at => :desc).all
   end
 
   def show
