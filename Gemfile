@@ -59,3 +59,7 @@ gem 'carrierwave', '~> 1.0'
 # Users
 gem "devise", "~> 4.3.0"
 gem "devise_invitable", "~> 1.7.2"
+
+# Bootstrap
+gem "jquery-rails"
+gem 'bootstrap-sass', '~> 3.3.6'
