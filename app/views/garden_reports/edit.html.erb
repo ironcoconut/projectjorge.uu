@@ -1,6 +1,6 @@
 <h1>Editing Garden Report</h1>
 
-<%= render 'form', garden_report: @garden_report %>
+<%= render 'form', garden_report: @garden_report, garden: @garden%>
 
-<%= link_to 'Show', @garden_report %> |
-<%= link_to 'Back', garden_reports_path %>
+<%= link_to 'Show', [@garden, @garden_report] %> |
+<%= link_to 'Back', garden_garden_reports_path %>

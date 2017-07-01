@@ -1,9 +1,10 @@
 class GardenReportsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_garden
   before_action :set_garden_report, only: [:show, :edit, :update, :destroy]
 
   def index
-    @garden_reports = GardenReport.all
+    @garden_reports = GardenReport.includes(:garden).all
   end
 
   def show
@@ -21,11 +22,9 @@ class GardenReportsController < ApplicationController
 
     respond_to do |format|
       if @garden_report.save
-        format.html { redirect_to garden_report_path(id: @garden_report.id, garden_id: @garden_report.garden_id), notice: 'Garden report was successfully created.' }
-        format.json { render :show, status: :created, location: @garden_report }
+        format.html { redirect_to [@garden, @garden_report], notice: 'Garden report was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @garden_report.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -33,11 +32,9 @@ class GardenReportsController < ApplicationController
   def update
     respond_to do |format|
       if @garden_report.update(garden_report_params)
-        format.html { redirect_to @garden_report, notice: 'Garden report was successfully updated.' }
-        format.json { render :show, status: :ok, location: @garden_report }
+        format.html { redirect_to garden_garden_report_path([@garden, @garden_report]), notice: 'Garden report was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @garden_report.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -46,16 +43,20 @@ class GardenReportsController < ApplicationController
     @garden_report.destroy
     respond_to do |format|
       format.html { redirect_to garden_reports_url, notice: 'Garden report was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
   private
-    def set_garden_report
-      @garden_report = GardenReport.find(params[:id])
-    end
 
-    def garden_report_params
-      params.require(:garden_report).permit(:notes, :photo, :remove_image).merge(params.permit(:garden_id))
-    end
+  def set_garden
+    @garden = Garden.find(params[:garden_id])
+  end
+
+  def set_garden_report
+    @garden_report = GardenReport.find(params[:id])
+  end
+
+  def garden_report_params
+    params.require(:garden_report).permit(:notes, :photo, :remove_photo).merge(params.permit(:garden_id))
+  end
 end

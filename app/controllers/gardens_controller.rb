@@ -2,28 +2,21 @@ class GardensController < ApplicationController
   before_action :authenticate_user!
   before_action :set_garden, only: [:show, :edit, :update, :destroy]
 
-  # GET /gardens
-  # GET /gardens.json
   def index
     @gardens = Garden.all
   end
 
-  # GET /gardens/1
-  # GET /gardens/1.json
   def show
+    @garden_reports = GardenReport.where(garden_id: params[:id]).all
   end
 
-  # GET /gardens/new
   def new
     @garden = Garden.new
   end
 
-  # GET /gardens/1/edit
   def edit
   end
 
-  # POST /gardens
-  # POST /gardens.json
   def create
     @garden = Garden.new(garden_params)
 
@@ -38,8 +31,6 @@ class GardensController < ApplicationController
     end
   end
 
-  # PATCH/PUT /gardens/1
-  # PATCH/PUT /gardens/1.json
   def update
     respond_to do |format|
       if @garden.update(garden_params)
@@ -52,8 +43,6 @@ class GardensController < ApplicationController
     end
   end
 
-  # DELETE /gardens/1
-  # DELETE /gardens/1.json
   def destroy
     @garden.destroy
     respond_to do |format|
@@ -63,13 +52,12 @@ class GardensController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_garden
-      @garden = Garden.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def garden_params
-      params.require(:garden).permit(:name, :location, :description)
-    end
+  def set_garden
+    @garden = Garden.find(params[:id])
+  end
+
+  def garden_params
+    params.require(:garden).permit(:name, :location, :description)
+  end
 end

@@ -1,4 +1,7 @@
-<%= image_tag @garden_report.photo.url %>
+<% if @garden_report.photo.present? %>
+  <%= image_tag @garden_report.photo.url %>
+<% end %>
+
 <p>
   <strong>Notes:</strong>
   <%= @garden_report.notes %>
@@ -9,5 +12,5 @@
   <%= @garden_report.garden.name %>
 </p>
 
-<%= link_to 'Edit', edit_garden_report_path(id: @garden_report.id, garden_id: @garden_report.garden_id) %> |
-<%= link_to 'Back', garden_reports_path %>
+<%= link_to 'Edit', [:edit, @garden, @garden_report] %> |
+<%= link_to 'Back', @garden %>

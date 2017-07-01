@@ -10,13 +10,12 @@
   </thead>
 
   <tbody>
-    <% @garden_reports.each do |garden_report| %>
+    <% @garden_reports.each do |report| %>
       <tr>
-        <td><%= garden_report.notes %></td>
-        <td><%= garden_report.garden %></td>
-        <td><%= link_to 'Show', garden_report %></td>
-        <td><%= link_to 'Edit', edit_garden_report_path(garden_report) %></td>
-        <td><%= link_to 'Destroy', garden_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= report.notes %></td>
+        <td><%= report.garden.name %></td>
+        <td><%= link_to 'Show', [report.garden,report] %></td>
+        <td><%= link_to 'Edit', [:edit, report.garden,report] %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +23,4 @@
 
 <br>
 
-<%= link_to 'New Garden Report', new_garden_report_path %>
+<%= link_to 'New Garden Report', new_garden_garden_report_path(@garden) %>

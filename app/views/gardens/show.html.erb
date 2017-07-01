@@ -13,5 +13,23 @@
   <%= @garden.description %>
 </p>
 
+<p>
+  <strong>Reports:</strong>
+</p>
+
+<table>
+  <tbody>
+    <% @garden_reports.each do |report| %>
+      <tr>
+        <td><%= report.notes %></td>
+        <td><%= report.garden.name %></td>
+        <td><%= link_to 'Show', [@garden, report] %></td>
+        <td><%= link_to 'Edit', [:edit, @garden, report] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to 'Edit', edit_garden_path(@garden) %> |
+<%= link_to 'New Report', new_garden_garden_report_path(@garden) %> |
 <%= link_to 'Back', gardens_path %>
