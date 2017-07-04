@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-xs-12 text-right">
+    <p class="no-margin">( <strong>view photos</strong> | <%= link_to "view list", gardens_path(view_list: true) %> )</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 text-center" id="garden-report-container">
+    <% @garden_reports.each do |report| %>
+      <div class="garden-report">
+        <%= link_to [report.garden, report] do %>
+          <%= image_tag report.photo.url, class: "auto-width-photo", data: { checkwidth: true } %>
+          <p class="garden-report-text text-left">
+            <span><%= report.garden.name %></span>
+            <span class="pull-right"><%= report.created_at.to_date %></span>
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+$(resizeGardenPhotos.bind(this, '#garden-report-container', '.garden-report img'));
+$(window).resize(resizeGardenPhotos.bind(this, '#garden-report-container', '.garden-report img'));
+</script>

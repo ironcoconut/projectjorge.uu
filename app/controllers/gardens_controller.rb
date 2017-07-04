@@ -3,7 +3,14 @@ class GardensController < ApplicationController
   before_action :set_garden, only: [:show, :edit, :update, :destroy]
 
   def index
-    @garden_reports = GardenReport.includes(:garden).order(:created_at => :desc).all
+    if(params[:view_list])
+      @garden_reports = GardenReport.order(:created_at => :desc).group_by(&:garden_id)
+      @gardens = Garden.order(:name).all
+      render("gardens/index_list")
+    else
+      @garden_reports = GardenReport.order(:created_at => :desc)
+      render("gardens/index_photos")
+    end
   end
 
   def show

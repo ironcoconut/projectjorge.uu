@@ -1,6 +1,6 @@
 class GardenReportsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_garden
+  before_action :set_garden, except: [:new, :create]
   before_action :set_garden_report, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -12,6 +12,7 @@ class GardenReportsController < ApplicationController
 
   def new
     @garden_report = GardenReport.new
+    @gardens = Garden.all
   end
 
   def edit
@@ -22,8 +23,9 @@ class GardenReportsController < ApplicationController
 
     respond_to do |format|
       if @garden_report.save
-        format.html { redirect_to [@garden, @garden_report], notice: 'Garden report was successfully created.' }
+        format.html { redirect_to [@garden_report.garden, @garden_report], notice: 'Garden report was successfully created.' }
       else
+        @gardens = Garden.all
         format.html { render :new }
       end
     end
@@ -57,6 +59,6 @@ class GardenReportsController < ApplicationController
   end
 
   def garden_report_params
-    params.require(:garden_report).permit(:notes, :photo, :remove_photo).merge(params.permit(:garden_id))
+    params.require(:garden_report).permit(:notes, :photo, :remove_photo, :garden_id, :photo_cache).merge(params.permit(:garden_id))
   end
 end

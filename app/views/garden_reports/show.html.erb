@@ -1,14 +1,13 @@
-<%= image_tag @garden_report.photo.url %>
-
-<p>
-  <strong>Notes:</strong>
-  <%= @garden_report.notes %>
-</p>
-
-<p>
-  <strong>Garden:</strong>
-  <%= @garden_report.garden.name %>
-</p>
-
-<%= link_to 'Edit', [:edit, @garden, @garden_report] %> |
-<%= link_to 'Back', @garden %>
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+    <%= image_tag @garden_report.photo.url, class: "img-responsive" %>
+  </div>
+  <div class="col-xs-12 col-md-6">
+    <h2><%= @garden_report.garden.name %></h2>
+    <p>
+      <%= @garden_report.created_at.to_date %><br>
+      <%= @garden_report.notes %>
+    </p>
+  </div>
+</div>
+</div>

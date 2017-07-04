@@ -1,0 +1,5 @@
+<%= content_tag(:div, class: form.object.errors[label].present? ? "form-group has-error" : "form-group") do %>
+  <%= form.label label %>
+  <%= form.text_field label, class: "form-control" %>
+  <%= render "shared/error_messages", label: label, errors: form.object.errors[label] %>
+<% end %>
