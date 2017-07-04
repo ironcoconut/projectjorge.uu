@@ -1,11 +1,10 @@
 class GardensController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_garden, only: [:show, :edit, :update, :destroy]
+  before_action :set_garden, only: [:edit, :update, :destroy]
 
   def index
     if(params[:view_list])
-      @garden_reports = GardenReport.order(:created_at => :desc).group_by(&:garden_id)
-      @gardens = Garden.order(:name).all
+      @gardens = Garden.ordered_with_reports_desc.all
       render("gardens/index_list")
     else
       @garden_reports = GardenReport.order(:created_at => :desc)
@@ -14,7 +13,7 @@ class GardensController < ApplicationController
   end
 
   def show
-    @garden_reports = GardenReport.where(garden_id: params[:id]).all
+    @garden = Garden.ordered_with_reports_desc.find(params[:id])
   end
 
   def new

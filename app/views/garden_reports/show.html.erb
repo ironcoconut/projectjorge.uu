@@ -1,13 +1,12 @@
 <div class="row">
   <div class="col-xs-12 col-md-6">
-    <%= image_tag @garden_report.photo.url, class: "img-responsive" %>
+    <%= image_tag @report.photo.url, class: "img-responsive" %>
   </div>
   <div class="col-xs-12 col-md-6">
-    <h2><%= @garden_report.garden.name %></h2>
-    <p>
-      <%= @garden_report.created_at.to_date %><br>
-      <%= @garden_report.notes %>
-    </p>
+    <h2><%= @report.garden.name %> Report</h2>
+    <p><%= @report.created_at.to_date %></p>
+    <p><%= @report.notes %></p>
+    <p><small><%= link_to("edit report", [:edit, @report.garden, @report]) %> | <%= link_to("view garden", @report.garden) %></small></p>
   </div>
 </div>
 </div>

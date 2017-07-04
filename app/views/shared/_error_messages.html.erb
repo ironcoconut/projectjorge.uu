@@ -1,3 +1,3 @@
 <% if(errors.present?) %>
-  <span class="help-block"><%= "#{label.capitalize} #{errors}." %></span>
+  <span class="help-block"><%= "#{label.capitalize} #{errors.join(", ")}." %></span>
 <% end %>

@@ -4,41 +4,6 @@
   </div>
 
   <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
-    <%= form_with(model: @garden_report, url: new_garden_report_path, method: "POST", html: { multipart: true }, local: true) do |f| %>
-      <%= content_tag(:div, class: f.object.errors[:garden].present? ? "form-group has-error" : "form-group") do %>
-        <%= f.label :garden %>
-        <%= f.select :garden_id, options_from_collection_for_select(@gardens, "id", "name", f.object.garden && f.object.garden.id), { prompt: "Please select a garden"}, { class: "form-control" } %>
-        <%= render "shared/error_messages", label: "garden", errors: f.object.errors[:garden] %>
-      <% end %>
-
-      <%= render "shared/text_area", form: f, label: "notes" %>
-
-      <%= content_tag(:div, class: f.object.errors[:photo].present? ? "form-group has-error" : "form-group") do %>
-        <%= f.label :photo %>
-        <%= f.file_field :photo, class: "form-control", id: "photo-input", accept: ".jpg,.jpeg,.gif,.png" %>
-        <%= f.hidden_field :photo_cache %>
-        <% if(f.object.errors[:photo].present?) %>
-          <span class="help-block"><%= "Photo must be either a *.jpg, *.jpeg, *.gif, or *.png." %></span>
-        <% end %>
-      <% end %>
-
-      <div class="form-group" id="preview-image-container">
-        <%= image_tag(f.object.photo_url, class: "preview-image") if f.object.photo? %>
-      </div>
-
-      <div class="form-group">
-        <%= f.submit value: "Create Garden Report", class: "btn btn-default" %>
-      </div>
-    <% end %>
+    <%= render 'form', report: @report, gardens: @gardens, url: new_garden_report_path, method: "POST" %>
   </div>
 </div>
-
-<script>
-$("#photo-input").change(function(){
-  displayPreviewImage(this, '#preview-image-container', '.preview-image');
-});
-<% if(@garden_report.photo?) %>
-  $(resizeGardenPhotos.bind(this, '#preview-image-container',".preview-image"));
-  $(window).resize(resizeGardenPhotos.bind(this, '#preview-image-container',".preview-image"));
-<% end %>
-</script>

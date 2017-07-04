@@ -1,32 +1,36 @@
-<%= form_for([garden, garden_report], html: { multipart: true }, local: true) do |form| %>
-  <% if garden_report.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(garden_report.errors.count, "error") %> prohibited this garden_report from being saved:</h2>
-
-      <ul>
-        <% garden_report.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
+<%= form_with(model: report, url: url, method: method, html: { multipart: true }, local: true) do |f| %>
+  <%= content_tag(:div, class: f.object.errors[:garden].present? ? "form-group has-error" : "form-group") do %>
+    <%= f.label :garden %>
+    <%= f.select :garden_id, options_from_collection_for_select(gardens, "id", "name", f.object.garden && f.object.garden.id), { prompt: "Please select a garden"}, { class: "form-control" } %>
+    <%= render "shared/error_messages", label: "garden", errors: f.object.errors[:garden] %>
   <% end %>
 
-  <div class="field">
-    <%= form.label :notes %>
-    <%= form.text_area :notes, id: :garden_report_notes %>
-  </div>
+  <%= render "shared/text_area", form: f, label: "notes" %>
 
-  <div class="field">
-    <%= form.label :photo %><br>
-    <%= form.file_field :photo %>
-    <% if form.object.photo? %>
-      <%= image_tag form.object.photo.url %>
-      <%= form.label :remove_photo %>
-      <%= form.check_box :remove_photo %>
+  <%= content_tag(:div, class: f.object.errors[:photo].present? ? "form-group has-error" : "form-group") do %>
+    <%= f.label :photo %>
+    <%= f.file_field :photo, class: "form-control", id: "photo-input", accept: ".jpg,.jpeg,.gif,.png" %>
+    <%= f.hidden_field :photo_cache %>
+    <% if(f.object.errors[:photo].present?) %>
+      <span class="help-block"><%= "Photo must be either a *.jpg, *.jpeg, *.gif, or *.png." %></span>
     <% end %>
+  <% end %>
+
+  <div class="form-group" id="preview-image-container">
+    <%= image_tag(f.object.photo_url, class: "preview-image") if f.object.photo? %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= f.submit class: "btn btn-default" %>
   </div>
 <% end %>
+
+<script>
+$("#photo-input").change(function(){
+  displayPreviewImage(this, '#preview-image-container', '.preview-image');
+});
+<% if(report.photo?) %>
+  $(resizeGardenPhotos.bind(this, '#preview-image-container',".preview-image"));
+  $(window).resize(resizeGardenPhotos.bind(this, '#preview-image-container',".preview-image"));
+<% end %>
+</script>

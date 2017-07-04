@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post "uu-gardening-team/new_report", :to => "garden_reports#create", as: "post_garden_report"
 
   resources :gardens, path: "uu-gardening-team" do
-    resources :garden_reports, path: "reports", except: [:new, :create]
+    resources :garden_reports, path: "reports", except: [:new, :create, :index]
   end
 
   root 'root#index'

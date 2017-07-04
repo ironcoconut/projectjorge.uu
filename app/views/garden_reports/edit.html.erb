@@ -1,6 +1,12 @@
-<h1>Editing Garden Report</h1>
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Editing Garden Report</h1>
+  </div>
 
-<%= render 'form', garden_report: @garden_report, garden: @garden%>
+  <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
+    <%= render 'form', report: @report, gardens: @gardens, url: [@report.garden, @report], method: "PUT" %>
 
-<%= link_to 'Show', [@garden, @garden_report] %> |
-<%= link_to 'Back', garden_garden_reports_path %>
+    <%= link_to 'Show', [@report.garden, @report] %> |
+    <%= link_to 'Garden', @report.garden %>
+  </div>
+</div>

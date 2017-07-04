@@ -43,14 +43,14 @@ function displayPreviewImage(input, container, images) {
     var reader = new FileReader();
 
     reader.onload = function (e) {
-      var photo = $("#theImg");
+      var photo = $(".preview-image");
 
       if(0 == photo.length) {
-        $('#preview-image-container').append($('<img>',{class:'preview-image',id:'theImg',src: e.target.result}));
+        $('#preview-image-container').append($('<img>',{class: 'preview-image', src: e.target.result}));
         resizeGardenPhotos(container, images);
         $(window).resize(resizeGardenPhotos.bind(this, container, images));
       } else {
-        photo.attr('src', e.target.result);
+        photo.first().attr('src', e.target.result);
       }
     }
 
