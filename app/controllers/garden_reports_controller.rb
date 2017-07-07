@@ -1,5 +1,6 @@
 class GardenReportsController < ApplicationController
-  before_action :authenticate_user!
+  before_action { set_navbar("garden") }
+  before_action :authenticate_user!, except: [:show]
 
   def show
     @report = GardenReport.includes(:garden).find(params[:id])

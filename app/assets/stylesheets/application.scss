@@ -14,6 +14,10 @@ body {
   margin-bottom: 10px;
 }
 
+.top-margin-10 {
+  margin-top: 10px;
+}
+
 .bottom-margin-0 {
   margin-bottom: 0px;
 }
@@ -51,4 +55,9 @@ body {
 .auto-width-photo {
   height: 300px;
   width: auto;
+}
+
+.alert {
+  margin-top: 20px;
+  margin-bottom: 0px;
 }

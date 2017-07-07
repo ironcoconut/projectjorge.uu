@@ -1,5 +1,6 @@
 class GardensController < ApplicationController
-  before_action :authenticate_user!
+  before_action { set_navbar("garden") }
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_garden, only: [:edit, :update, :destroy]
 
   def index
