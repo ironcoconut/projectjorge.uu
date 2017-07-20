@@ -55,6 +55,7 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # File uploads
 gem 'carrierwave', '~> 1.0'
+gem 'fog-aws'
 
 # Users
 gem "devise", "~> 4.3.0"
