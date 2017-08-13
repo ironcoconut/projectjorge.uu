@@ -1,0 +1,8 @@
+<%= content_tag(:div, class: form.object.errors[label].present? ? "form-group has-error" : "form-group") do %>
+  <%= form.label label, class: "control-label" %>
+  <div class="input-group">
+    <span class="input-group-addon">$</span>
+    <%= form.number_field label, class: "form-control", step: "0.01", min: "0.00" %>
+    <%= render "shared/error_messages", label: label, errors: form.object.errors[label] %>
+  </div>
+<% end %>

@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Add New Resource for the Parent's Group</h1>
+  </div>
+
+  <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
+    <%= render 'form', parents_resource: @parents_resource, categories: @categories %>
+  </div>
+
+  <div class="col-xs-12">
+    <%= link_to 'Back', parents_resources_path %>
+  </div>
+</div>

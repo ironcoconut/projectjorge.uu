@@ -1,0 +1,19 @@
+<%= content_tag(:div, class: form.object.errors[label].present? ? "form-group has-error" : "form-group") do %>
+  <%= form.label label, class: "control-label bottom-margin-10" %>
+  <div class="input-group">
+    <%= form.text_field label,
+      class: "form-control",
+      data: {
+        provide: 'slider',
+        slider_tooltip: 'hide',
+        slider_orientation: 'vertical',
+        slider_min: '0',
+        slider_max: range.length.to_s,
+        slider_value: [range.length / 3, range.length * 2 / 3],
+        slider_ticks: (0...range.length).to_a,
+        slider_ticks_labels: range,
+      }
+    %>
+    <%= render "shared/error_messages", label: label, errors: form.object.errors[label] %>
+  </div>
+<% end %>

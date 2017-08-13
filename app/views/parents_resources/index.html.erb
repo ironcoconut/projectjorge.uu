@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Parent's Resources</h1>
+  </div>
+
+  <div class="col-xs-12">
+    <table id='parents-resources-table' class='table'>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Link</th>
+          <th>Notes</th>
+          <th>Min Age</th>
+          <th>Max Age</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th colspan="1"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @parents_resources.each do |parents_resource| %>
+          <tr>
+            <td><%= parents_resource.title %></td>
+            <td><%= link_to parents_resource.link, parents_resource.link %></td>
+            <td><%= parents_resource.notes %></td>
+            <td><%= parents_resource.age_min %></td>
+            <td><%= parents_resource.age_max %></td>
+            <td><%= parents_resource.category %></td>
+            <td><%= number_to_currency parents_resource.price %></td>
+            <td><%= link_to 'Edit', edit_parents_resource_path(parents_resource) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-xs-12">
+    <%= link_to 'New Parents Resource', new_parents_resource_path %>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+      $('#parents-resources-table').DataTable();
+} );
+</script>

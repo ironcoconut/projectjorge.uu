@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-xs-12">
+    <p>
+    <strong>Title:</strong>
+    <%= @parents_resource.title %>
+    </p>
+
+    <p>
+    <strong>Link:</strong>
+    <%= link_to @parents_resource.link %>
+    </p>
+
+    <p>
+    <strong>Notes:</strong>
+    <%= @parents_resource.notes %>
+    </p>
+
+    <p>
+    <strong>Age min:</strong>
+    <%= @parents_resource.age_min %>
+    </p>
+
+    <p>
+    <strong>Age max:</strong>
+    <%= @parents_resource.age_max %>
+    </p>
+
+    <p>
+    <strong>Category:</strong>
+    <%= @parents_resource.category %>
+    </p>
+
+    <p>
+    <strong>Price:</strong>
+    <%= number_to_currency @parents_resource.price %>
+    </p>
+  </div>
+
+  <div class="col-xs-12">
+    <%= link_to 'Edit', edit_parents_resource_path(@parents_resource) %> |
+    <%= link_to 'Back', parents_resources_path %>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-slider";
 
 body {
   padding-top: 50px;
@@ -60,4 +61,8 @@ body {
 .alert {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.slider {
+  touch-action: none;
 }

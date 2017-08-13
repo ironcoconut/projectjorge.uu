@@ -1,2 +1,0 @@
-module GardenReportsHelper
-end

@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Edit <%= @parents_resource.title %></h1>
+  </div>
+
+  <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6">
+    <%= render 'form', parents_resource: @parents_resource, categories: @categories %>
+  </div>
+
+  <div class="col-xs-12">
+    <%= link_to 'Show', @parents_resource %> |
+    <%= link_to 'Back', parents_resources_path %>
+  </div>
+</div>

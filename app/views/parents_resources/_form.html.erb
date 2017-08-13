@@ -1,0 +1,18 @@
+<%= form_with(model: parents_resource, local: true) do |f| %>
+  <%= render "shared/text_field", form: f, label: "title" %>
+  <%= render "shared/text_field", form: f, label: "link" %>
+  <%= render "shared/text_area", form: f, label: "notes" %>
+  <%= render "shared/slider_input", form: f, label: "age_range", range: @age_range %>
+
+  <%= content_tag(:div, class: f.object.errors[:garden].present? ? "form-group has-error" : "form-group") do %>
+    <%= f.label :category %>
+    <%= f.select :category, options_for_select(categories, f.object.category), {}, { class: "form-control" } %>
+    <%= render "shared/error_messages", label: "garden", errors: f.object.errors[:garden] %>
+  <% end %>
+
+  <%= render "shared/currency_field", form: f, label: "price" %>
+
+  <div class="actions">
+    <%= f.submit "Save Resource", class: "btn btn-default" %>
+  </div>
+<% end %>

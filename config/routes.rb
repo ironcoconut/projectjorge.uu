@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :gardens, path: "uu-gardening-team" do
     resources :garden_reports, path: "reports", except: [:new, :create, :index]
   end
+  resources :parents_resources, path: "uu-parents-resources", except: [:destroy]
 
   root 'root#index'
 end
