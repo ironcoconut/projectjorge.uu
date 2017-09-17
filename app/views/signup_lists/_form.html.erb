@@ -3,7 +3,7 @@
   <%= render "shared/email_field", form: f, label: "email" %>
 
   <div class="actions">
-    <%= f.submit "Join!", class: "btn btn-default" %>
+    <%= f.submit "Join!", class: "btn btn-default", data: { disable_with: "Join!" } %>
     <%= link_to "Clear", "#", class: "pull-right", id: "clear-form" %>
   </div>
 <% end %>
