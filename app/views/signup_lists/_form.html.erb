@@ -1,0 +1,8 @@
+<%= form_with(model: signup_list, local: true) do |f| %>
+  <%= render "shared/text_field", form: f, label: "name" %>
+  <%= render "shared/email_field", form: f, label: "email" %>
+
+  <div class="actions">
+    <%= f.submit "Join!", class: "btn btn-default" %>
+  </div>
+<% end %>

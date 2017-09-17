@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :garden_reports, path: "reports", except: [:new, :create, :index]
   end
   resources :parents_resources, path: "uu-parents-resources", except: [:destroy]
+  resources :signup_lists, path: "uu-hacktivists", only: [:index, :create]
 
   root 'root#index'
 end

@@ -11,6 +11,9 @@
     <li><%= link_to "Home", parents_resources_path %></li>
     <li><%= link_to "New Resource", new_parents_resource_path %></li>
   <% end %>
+<% when "hacktivists" %>
+  <%= render "shared/top_navbar", mission_name: "UU Hacktivists", mission_path: signup_lists_path do %>
+  <% end %>
 <% else %>
   <%= render "shared/top_navbar", mission_name: "Project Jorge", mission_path: root_path do %>
   <% end %>

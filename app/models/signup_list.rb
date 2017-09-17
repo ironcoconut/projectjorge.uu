@@ -1,0 +1,2 @@
+class SignupList < ApplicationRecord
+end
