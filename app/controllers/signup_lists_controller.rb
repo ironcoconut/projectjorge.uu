@@ -9,9 +9,9 @@ class SignupListsController < ApplicationController
     @signup_list = SignupList.new(signup_list_params)
 
     if @signup_list.save
-      redirect_to signup_lists_path, notice: 'Welcome to the mailing list!'
+      render :json => { count: SignupList.count, message: "Thank you for joining, #{@signup_list.name}." }
     else
-      render :index
+      render :json => { error_message: @signup_list.errors.full_messages.join(". ").concat(".") }
     end
   end
 

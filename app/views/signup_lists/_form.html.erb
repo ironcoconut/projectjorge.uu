@@ -1,8 +1,65 @@
-<%= form_with(model: signup_list, local: true) do |f| %>
+<%= form_with(model: signup_list, local: true, id: "signup-list-form", data: { remote: true, type: :json }) do |f| %>
   <%= render "shared/text_field", form: f, label: "name" %>
   <%= render "shared/email_field", form: f, label: "email" %>
 
   <div class="actions">
     <%= f.submit "Join!", class: "btn btn-default" %>
+    <%= link_to "Clear", "#", class: "pull-right", id: "clear-form" %>
   </div>
 <% end %>
+
+<script>
+function successHandler (data) {
+  if(data.error_message) {
+    $("#message").text(data.error_message).slideDown(300);
+  } else {
+    $(this)[0].reset();
+    if("" == $("#message").text()) {
+      $("#message").text(data.message).slideDown(300, function () {
+        $(this).delay(3000).slideUp(300, function() {
+          $(this).text("");
+          $("#count").fadeOut(300, function() {
+            $(this).text(data.count).fadeIn(300);
+          });
+        });
+      });
+    } else {
+      $("#message").fadeOut(300, function () {
+        $(this).text(data.message).fadeIn(300, function () {
+          $(this).delay(3000).slideUp(300, function() {
+            $(this).text("");
+            $("#count").fadeOut(300, function() {
+              $(this).text(data.count).fadeIn(300);
+            });
+          });
+        });
+      });
+    }
+  }
+}
+
+function errorHandler (e, a,data) {
+  console.log(data);
+  $("#message").text("Something went wrong. :/").slideDown(300);
+}
+
+$(document).ready(function() {
+  $("#clear-form").on("click", function () {
+    $("form#signup-list-form")[0].reset();
+    $("#message").slideUp(300, function() {
+      $(this).text("");
+    });
+  });
+  $("form#signup-list-form").submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+      url: $(this).attr('action'),
+      type: $(this).attr('method'),
+      dataType: 'json',
+      data: $(this).serialize(),
+      success: successHandler.bind(this),
+      error: errorHandler.bind(this)
+    });
+  });
+});
+</script>
